@@ -11,10 +11,9 @@ public class ConexaoDB {
 
       	try {
 
-        		Class.forName (driver).newInstance();
+        		Class.forName (driver).newInstance ();
 			Connection conexao = DriverManager.getConnection (url+db, usuario, senha);
-			System.out.println ("Conectou!");
-			conexao.close();
+			conexao.close ();
 
         	} catch (SQLException e) {
 
