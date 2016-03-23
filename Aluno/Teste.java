@@ -71,3 +71,66 @@ public class MonitoriaPrincipal {
 
 
 */
+/*
+
+package monitoria;
+import java.util.ArrayList;
+import javax.swing.JOptionPane;
+
+
+
+public class MonitoriaPrincipal {
+
+
+
+public static void menu(int numero) {
+	
+	
+	
+}
+	
+	
+	
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+		
+		ArrayList<Aluno> turma=new ArrayList<Aluno>();
+		String opcao;
+		
+		
+		
+		do
+		{
+					Aluno aluno = new Aluno();
+					String nome = JOptionPane.showInputDialog("digite o nome ");
+					aluno.insereNome(nome);
+					String matricula = JOptionPane.showInputDialog("digite o matricula ");
+					int m = Integer.parseInt(matricula);
+					
+					aluno.insereMatricula(m);
+					turma.add(aluno);
+					opcao=JOptionPane.showInputDialog("\nDeseja continuar ??\n");
+		}while(!opcao.equals("nao"));
+		
+		String listaDealunos="-----------Lista de alunos------------\n";
+		
+		for(int i =0; i<turma.size();i++ ){
+			listaDealunos+="Nome do aluno:   "+
+			turma.get(i).getNome()+"\n"+"matricula do aluno:   "+
+			turma.get(i).getMatricula()+"\n";
+			
+			System.out.println("Obrigado pela comtribuicao "+turma.get(i).getNome()+ " volte sempre ");
+			
+		}
+		JOptionPane.showMessageDialog(null,listaDealunos);
+		
+		
+		
+
+	}
+
+}
+
+
+
+*/
