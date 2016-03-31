@@ -26,13 +26,13 @@ public class Teste {
 			if(opcao.equals("5")){
 				String tipo;
 				tipo = JOptionPane.showInputDialog(null, "Digite o tipo da conta");
-				for(int i = 0; i < array.size(); i++){
+				for(int i = 0; i < contas.size(); i++){
 					
 					if(array.get(i).getTipo().equals(tipo)){
-						contas += String.format("%s %f %s %s%n", array.get(i).getTipo(), array.get(i).getValor(), array.get(i).getStatus(), array.get(i).getCodigo());
+						contasStr += String.format("%s %f %s %s%n", array.get(i).getTipo(), array.get(i).getValor(), array.get(i).getStatus(), array.get(i).getCodigo());
 					}
 				}
-				JOptionPane.showMessageDialog(null, contas);
+				JOptionPane.showMessageDialog(null, contasStr);
 			}
 			
 		} while(opcao.equals("s"));
