@@ -18,7 +18,7 @@ public class Teste {
 			opcao = JOptionPane.showInputDialog(null, "Digite a opcao:\n1 - Cadastrar\n2 - Fazerconsulta\n3 - Quitar conta\n4 - Listar contas\n5 - Listar contas de determinado tipo\n - Para sair");
 			if(opcao.equals("4")){
 				for(int i = 0; i < array.size(); i++){
-					contas += String.format("%s %f %s %s%n", array.get(i).getTipo(), array.get(i).getValor(), array.get(i).getStatus(), array.get(i).getCodigo());
+					contas += String.format("%s %f %s %s%n", contas.get(i).getTipo(), contas.get(i).getValor(), contas.get(i).getStatus(), contas.get(i).getCodigo());
 				}
 				JOptionPane.showMessageDialog(null, contas);
 			}
@@ -29,7 +29,7 @@ public class Teste {
 				for(int i = 0; i < contas.size(); i++){
 					
 					if(array.get(i).getTipo().equals(tipo)){
-						contasStr += String.format("%s %f %s %s%n", array.get(i).getTipo(), array.get(i).getValor(), array.get(i).getStatus(), array.get(i).getCodigo());
+						contasStr += String.format("%s %f %s %s%n", contas.get(i).getTipo(), contas.get(i).getValor(), contas.get(i).getStatus(), contas.get(i).getCodigo());
 					}
 				}
 				JOptionPane.showMessageDialog(null, contasStr);
