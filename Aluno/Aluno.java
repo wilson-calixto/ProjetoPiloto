@@ -26,9 +26,9 @@ package monitoria;
 
 public class Aluno {
 	
-	String nome;
-	int matricula;
-	String atividade;
+	private String nome;
+	private int matricula;
+	private String atividade;
 	
 	void insereNome(String NomeDoAluno){
 		nome=NomeDoAluno;	
@@ -44,18 +44,15 @@ public class Aluno {
 		
 	}
 	
-	
-	
-	String getNome(){
+	public String getNome() {
 		return nome;
-	
-	}	
-	
-	int getMatricula(){
-		return matricula;
-		
 	}
 	
+	public int getMatricula() {
+		return matricula;
+	}
 	
+	public String getAtividade() {
+		return atividade;
+	}
 }
-
