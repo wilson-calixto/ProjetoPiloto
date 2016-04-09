@@ -40,4 +40,3 @@ public class Grafico extends JFrame { //usando o JFrame como extenção da class
 	
 	
 	}
-}

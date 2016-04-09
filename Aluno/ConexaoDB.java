@@ -13,19 +13,19 @@ public class ConexaoDB {
 	final String url = "jdbc:mysql://localhost:3306/alunos";
 	String INSERT_QUERY = "INSERT INTO alunos(nome, matricula, atividade) VALUES(?, ?, ?)";
 	String SELECT_QUERY = "SELECT * FROM alunos WHERE matricula = ";
+	String UPDATE_QUERY1 = "UPDATE alunos SET nome = ? WHERE matricula =  ?";
+	String UPDATE_QUERY2 = "UPDATE alunos SET atividade = ? WHERE matricula =  ?";
 	String DELETE_QUERY = "DELETE FROM alunos WHERE matricula = ?";
 	
 	public void insert(String nome, int matricula, String atividade) {
-		try {
-
-        	Class.forName (driver).newInstance ();
-			Connection conexao = DriverManager.getConnection (url, "root", "banco123");
-			PreparedStatement preparedStmt = conexao.prepareStatement(INSERT_QUERY);
+		
+		try (Connection conexao = DriverManager.getConnection (url, "root", "banco123");
+			 PreparedStatement preparedStmt = conexao.prepareStatement(INSERT_QUERY)) {
+			
 		    preparedStmt.setString (1, nome);
 		    preparedStmt.setInt(2, matricula);
 		    preparedStmt.setString (3, atividade);
 		    preparedStmt.execute();
-			conexao.close ();
 
         } catch (Exception ex) {
             	ex.printStackTrace();
@@ -33,13 +33,13 @@ public class ConexaoDB {
 	}
 	
 	public List<Aluno> select(int matricula) {
+		
 		ArrayList<Aluno> alunos = new ArrayList<Aluno>();
-		try {
-
-        	Class.forName (driver).newInstance ();
-			Connection conexao = DriverManager.getConnection (url, "root", "banco123");
-			Statement statement = conexao.createStatement();
-			ResultSet resultSet = statement.executeQuery(SELECT_QUERY+matricula);
+		
+		try (Connection conexao = DriverManager.getConnection (url, "root", "banco123");
+			 Statement statement = conexao.createStatement();
+			 ResultSet resultSet = statement.executeQuery(SELECT_QUERY+matricula)) {
+			
 			while (resultSet.next())
 			{
 				Aluno aluno = new Aluno();
@@ -49,25 +49,52 @@ public class ConexaoDB {
 				aluno.insereAtividade(resultSet.getString("atividade"));
 				alunos.add(aluno);
 			}
+			
 
         } catch (Exception ex) {
             	ex.printStackTrace();
-        }
+        } 
 		return alunos;
 	}
 	
-	public void delete(int matricula) {
-		try {
-
-			Class.forName (driver).newInstance ();
-			Connection conexao = DriverManager.getConnection (url, "root", "banco123");
-			PreparedStatement preparedStmt = conexao.prepareStatement(DELETE_QUERY);
+	public void updateNome(int matricula, String nome) {
+			
+		try (Connection conexao = DriverManager.getConnection (url, "root", "banco123");
+			 PreparedStatement preparedStmt = conexao.prepareStatement(UPDATE_QUERY1)) {
+				
+			preparedStmt.setString(1, nome);
 			preparedStmt.setInt(2, matricula);
-		    preparedStmt.execute();
-			conexao.close ();
+			preparedStmt.execute();
 
 		} catch (Exception ex) {
-	      	ex.printStackTrace();
+			ex.printStackTrace();
 	    }
+	}
+	
+	public void updateAtividade(int matricula, String atividade) {
+		
+		try (Connection conexao = DriverManager.getConnection (url, "root", "banco123");
+		     PreparedStatement preparedStmt = conexao.prepareStatement(UPDATE_QUERY2)) {
+					
+			preparedStmt.setString(1, atividade);
+			preparedStmt.setInt(2, matricula);
+			preparedStmt.execute();
+
+		} catch (Exception ex) {
+			ex.printStackTrace();
+		}
+	}
+	
+	public void delete(int matricula) {
+		
+		try (Connection conexao = DriverManager.getConnection (url, "root", "banco123");
+			 PreparedStatement preparedStmt = conexao.prepareStatement(UPDATE_QUERY2)) {
+						
+			preparedStmt.setInt(1, matricula);
+			preparedStmt.execute();
+
+		} catch (Exception ex) {
+			ex.printStackTrace();
+		}
 	}
 }

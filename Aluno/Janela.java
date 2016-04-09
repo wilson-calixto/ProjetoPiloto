@@ -25,7 +25,7 @@ public class Janela extends JFrame {
 		JPanel panel1 = new JPanel();
 		panel1.setLayout(new GridBagLayout());
 		GridBagConstraints gbc = new GridBagConstraints();
-		gbc.insets = new Insets(3, 3, 3, 3);
+		gbc.insets = new Insets(5, 5, 5, 5);
 		gbc.gridy = 0; 
 	    gbc.gridx = 0; 
 	    gbc.gridwidth = 2;
