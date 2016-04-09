@@ -1,22 +1,30 @@
 import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
-import javax.swing.JTable;
-import javax.swing.table.DefaultTableModel;
+
 
 public class Janela extends JFrame {
 
 	private JButton button;
 	private JButton button2;
+	private JButton button3;
+	private JButton button4;
+	private JButton button5;
+	private JButton button6;
 	private JTextField textField1;
 	private JTextField textField2;
 	private JTextField textField3;
 	private JTextField textField4;
+	private JTextField textField5;
+	private JTextField textField6;
+	private JTextField textField7;
+	private JTextField textField8;
 	private JLabel label1;
 	private JLabel label2;
 	private JLabel label3;
-	private JTable table;
-	private DefaultTableModel model = new DefaultTableModel();
+	private JLabel label4;
+	private JPanel panel2;
+	private JPanel panel3;
 
 	public Janela() {
 
@@ -67,23 +75,26 @@ public class Janela extends JFrame {
 		panel1.add( button, gbc );
 		tabbedPane.addTab("Cadastro", null, panel1);
 		
-		JPanel panel2 = new JPanel();
+		panel2 = new JPanel();
 		panel2.setLayout(new FlowLayout());
 		textField4 = new JTextField(30);
 		panel2.add(textField4);
 		button2 = new JButton("Pesquisar");
 		button2.addActionListener(handler);
 		panel2.add(button2);
-		table = new JTable(model);
-		model.addColumn("Nome");
-		model.addColumn("Matrícula");
-		model.addColumn("Atividade");
-		table.getColumnModel().getColumn(0).setPreferredWidth(160);
-		table.getColumnModel().getColumn(1).setPreferredWidth(160);
-		table.getColumnModel().getColumn(2).setPreferredWidth(160);
-		panel2.add(table);
+		label4 = new JLabel();
+		panel2.add(label4);
 		tabbedPane.addTab("Pesquisa", panel2);
-		add(tabbedPane);
+		
+		panel3 = new JPanel();
+	    textField5 = new JTextField(30);
+	    panel3.add(textField5);
+	    button3 = new JButton("Deletar");
+	    button3.addActionListener(handler);
+	    panel3.add(button3);
+	    tabbedPane.addTab("Alterações", panel3);
+	    add(tabbedPane);
+		
 	}
 	
 	public class Handler implements ActionListener {
@@ -98,14 +109,16 @@ public class Janela extends JFrame {
 				aluno.insereNome(textField1.getText());
 				aluno.insereMatricula(Integer.parseInt(textField2.getText()));
 				aluno.insereAtividade(textField3.getText());
-				conexao.insert(aluno.getNome(), aluno.getMatricula(), aluno.getAtividade());
-				
+				conexao.insert(aluno.getNome(), aluno.getMatricula(), aluno.getAtividade());	
 			}
 			
-			if(event.getSource() == button2) {
-				for(Aluno a : conexao.select(Integer.parseInt(textField4.getText())))
-					model.addRow(new Object[]{a.getNome(), a.getMatricula(), a.getAtividade()});
-				
+			else if(event.getSource() == button2) {
+				String result = conexao.select(Integer.parseInt(textField4.getText()));
+				label4.setText(result);			
+			}
+			
+			else if(event.getSource() == button3) {
+				conexao.delete(Integer.parseInt(textField5.getText()));
 			}
 		}
 	}

@@ -3,9 +3,8 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Statement;
+import java.sql.SQLException;
 //import javax.swing.JOptionPane;
-import java.util.ArrayList;
-import java.util.List;
 
 public class ConexaoDB {
 	
@@ -32,29 +31,25 @@ public class ConexaoDB {
         }
 	}
 	
-	public List<Aluno> select(int matricula) {
+	public String select(int matricula) {
 		
-		ArrayList<Aluno> alunos = new ArrayList<Aluno>();
-		
+		Aluno aluno = new Aluno();
 		try (Connection conexao = DriverManager.getConnection (url, "root", "banco123");
 			 Statement statement = conexao.createStatement();
 			 ResultSet resultSet = statement.executeQuery(SELECT_QUERY+matricula)) {
 			
 			while (resultSet.next())
-			{
-				Aluno aluno = new Aluno();
-				
+			{				
 				aluno.insereNome(resultSet.getString("nome"));
 				aluno.insereMatricula(resultSet.getInt("matricula"));
 				aluno.insereAtividade(resultSet.getString("atividade"));
-				alunos.add(aluno);
 			}
 			
 
         } catch (Exception ex) {
             	ex.printStackTrace();
         } 
-		return alunos;
+		return String.format("Nome: %s    Matrícula: %d    Atividade: %s", aluno.getNome(), aluno.getMatricula(), aluno.getAtividade());
 	}
 	
 	public void updateNome(int matricula, String nome) {
@@ -87,13 +82,13 @@ public class ConexaoDB {
 	
 	public void delete(int matricula) {
 		
-		try (Connection conexao = DriverManager.getConnection (url, "root", "banco123");
-			 PreparedStatement preparedStmt = conexao.prepareStatement(UPDATE_QUERY2)) {
-						
+		try {
+			Connection conexao = DriverManager.getConnection (url, "root", "banco123");
+			PreparedStatement preparedStmt = conexao.prepareStatement(DELETE_QUERY);			
 			preparedStmt.setInt(1, matricula);
 			preparedStmt.execute();
 
-		} catch (Exception ex) {
+		} catch (SQLException ex) {
 			ex.printStackTrace();
 		}
 	}
