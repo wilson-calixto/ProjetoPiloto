@@ -43,9 +43,9 @@ int main(){
 	controleDePilhas.classifica(i4,0);
 
 
-	cout<<controleDePilhas.origem<<endl;
-	cout<<controleDePilhas.temporario[0]<<endl;
-	cout<<controleDePilhas.destino<<endl;
+	cout<<"origem "<<controleDePilhas.origem<<endl;
+	cout<<"temporaria "<<controleDePilhas.temporario[0]<<endl;
+	cout<<"destino "<<controleDePilhas.destino<<endl;
 
 
 	controleDePilhas.mostra();
