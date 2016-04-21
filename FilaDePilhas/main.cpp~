@@ -23,7 +23,7 @@ int main(){
 	Item i7("7");
 	Item i8("8");
 
-	// PILHA 1  
+	// PILHA 1
 	p1.empilha(i0);
 	p1.empilha(i1);
 	p1.empilha(i2);

@@ -46,7 +46,7 @@ public:
 	void empilha(Item item);
 	void desempilha(Item &item);
 	void mostra();
-	int busca(Item*);
+	int busca(Item);
 };
 
 

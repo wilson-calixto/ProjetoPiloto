@@ -113,7 +113,6 @@ public:
 	void desenfileirar();
 	void mostra();
 	int busca(Item item);
-	void enfileiraEntrada();
 
 	void setDestino(int destino) {
 			this->destino = destino;

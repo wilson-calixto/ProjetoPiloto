@@ -59,7 +59,5 @@ int main(){
 	//cout << p1.indice << endl;
 
 	//controleDePilhas.classifica(i1,0);
-	controleDePilhas.enfileiraEntrada();
-	controleDePilhas.filaDeFila.mostra();
 	return 0;
 }
