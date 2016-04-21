@@ -142,18 +142,69 @@ public:
 		}
 	}
 
-	void moveTemporario(int origem,int destino,Item item){
-				cout<<"\n aqui desempilha \n";
+	void TrocaDePilha(int origem,int destino,Item item){
+		//cout<<"\n  desempilhando de pilha "<<origem<<endl;
 				pilhas[origem].desempilha(item);
-				cout<<"\n aqui empilha \n";
+				cout<<"\nmovendo o item ";
+				item.mostra();
+				//cout<<"\n empilhando na pilha "<<destino<<endl;
 				pilhas[destino].empilha(item);
-
+			//	cout<<"\nitem na temporario"<<endl;
+				//			item.mostra();
 
 	}
+
+	void move(Item item, int origem,int destino,int temporario){
+		if(pilhas[this->destino].topo->item.codigo==item.codigo)
+		{//se topo do destino tiver o item
+			cout<<"fim da ordenacao"<<endl;//pilha de origem for == a item
+		}else{
+
+			//se topo do destino nao tiver o item e o topo for valido
+
+//&& pilhas[this->destino].topo->prox->item.codigo!=item.codigo
+
+			//limpa a pilha destino ele esta limpando tudo e isso nao e certo
+			if(pilhas[this->destino].topo->prox!=NULL ){
+
+				TrocaDePilha(destino,temporario,item);
+				cout<<"da pilha "<<destino<<" para a pilha "<<temporario<<endl;
+				move(item,origem,destino,temporario);
+
+			}else{
+
+				if(pilhas[this->origem].topo->prox->item.codigo==item.codigo){
+					TrocaDePilha(origem,destino,item);
+				}else{
+					TrocaDePilha(origem,temporario,item);
+					cout<<"da pilha "<<origem<<" para a pilha "<<temporario<<endl;
+					move(item,origem,destino,temporario);
+				}
+
+			}
+			//TrocaDePilha(origem,temporario,item);
+			//cout<<"da pilha "<<origem<<" para a pilha "<<temporario<<endl;
+		// talvez precise	move(item,origem,destino,temporario);
+			//cout<<"\nitem antes "<<endl;
+			//item.mostra();
+			//cout<<"\nitem depois "<<endl;
+				//		item.mostra();
+//			move(item,temporario,destino,origem);
+
+		}
+	}
+
+
+
 
 
 	void organiza(Item &item){
 
+
+		//tem que ter uma logica pra dizer qual é a posicao do vetor temporario
+		move(item,this->origem,this->destino,this->temporario[0]);
+
+		/*
 		//limpa a pilha origem ate achar o item
 			No *aux;
 			aux=pilhas[this->origem].topo->prox;
@@ -177,7 +228,7 @@ public:
 
 
 			moveTemporario(this->origem,this->destino,item);
-
+*/
 
 /*
 		for(int i=0;i<4;i++)
