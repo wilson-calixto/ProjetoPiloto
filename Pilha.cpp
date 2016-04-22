@@ -62,90 +62,26 @@ bool Pilha::busca(Item item){
 	return false;
 }
 
-Fila::Fila() {
-	frente = new No();
-	frente->prox = NULL;
-	tras = frente;
-}
 
-FilaDeFila::FilaDeFila() {
-	frente = new NoFila();
-	frente->prox = NULL;
-	tras = frente;
-}
-
-void Fila::enfileira(Item *x) {
-	tras->prox = new No();
-	tras = tras->prox;
-	tras->item = *x;
-	tras->prox = NULL;
-}
-
-void FilaDeFila::enfileiraFila(Fila *x) {
-	tras->prox = new NoFila();
-	tras = tras->prox;
-	tras->fila = *x;
-	tras->prox = NULL;
-}
-
-void Fila::desenfileira(Item *x) {
-	No *aux = frente;
-	frente = frente->prox;
-	*x = frente->item;
-	delete aux;
-}
-
-void FilaDeFila::desenfileiraFila(Fila *x) {
-	NoFila *aux = frente;
-	frente = frente->prox;
-	*x = frente->fila;
-	delete aux;
-}
-
-void Fila::mostra(){
-	No *aux;
-	aux=frente->prox;
-	while(aux!=NULL)
-	{
-		aux->item.mostra();
-		aux=aux->prox;
-	}
-	cout << endl;
-}
-
-void Fila::esvaziar() {
-	No *aux = frente;
-	frente = frente->prox;
-	while(aux!=NULL) {
-		delete aux;
-		No *aux = frente;
-		frente = frente->prox;
-	}
-}
 
 		/*     Comeco da Controle*/
 Controle::Controle(int tam)
 {
 	// TODO Auto-generated constructor stub
-	temporario=new int[tam-2];
-
+	this->tam=tam;
+	temporario=new int[tam];
 	pilhas=new Pilha[tam];
 	primeiro=0;
 	ultimo=0;
-	this->tam=tam;
+	ultimaPosicaoValida=0;
+
 }
 
 void Controle::aloca(Pilha pilha)
 {
-	if((ultimo+1)%tam!=primeiro)
-	{
-		pilha.setIndice(ultimo);//coloca o indice na pilha
-		pilhas[ultimo]=pilha;
-		ultimo=ultimo+1%tam;
-	}else{
-		cout<<"Controle cheia";
-
-	}
+		pilha.setIndice(ultimaPosicaoValida);//coloca o indice na pilha
+		pilhas[ultimaPosicaoValida]=pilha;
+		ultimaPosicaoValida++;
 }
 
 void Controle::desenfileirar(){
@@ -160,46 +96,29 @@ void Controle::desenfileirar(){
 
 
 void Controle::mostra(){
-		int primeiroLocal=primeiro;
-		while(ultimo!=primeiroLocal)
+		int i;
+		for(i=0;i<=ultimaPosicaoValida;i++)
 		{
-				pilhas[primeiroLocal].mostra();
+				pilhas[i].mostra();
 				cout<<"\n";
-				primeiroLocal=(primeiroLocal+1)%tam;
+
 		}
 
 }
 int Controle::busca(Item item){
-		int primeiroLocal=primeiro;
+
 		bool achou=false;
-		while(ultimo!=primeiroLocal)
+		for(int i=0;i<=ultimaPosicaoValida;i++)
 		{
-				achou=pilhas[primeiroLocal].busca(item);
+				achou=pilhas[i].busca(item);
 				if(achou)
 				{
-						return primeiroLocal;
+						return i;
 				}
-				primeiroLocal=(primeiroLocal+1)%tam;
 		}
 		return -1;
 }
 
-void Controle::enfileiraEntrada() {
-	string container;
-	do {
-		do {
-			cout << "\nInsira container | -1 para sair | -2 para enfileirar outra fila" << endl;
-			cin >> container;
-			Item item(container);
-			if(container != "-1" && container != "-2") fila.enfileira(&item);
-			
-		} while(container != "-2" && container != "-1");
-		
-		filaDeFila.enfileiraFila(&fila);
-		fila.esvaziar();
-		
-	} while(container != "-1");
-}
 
 
 
