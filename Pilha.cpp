@@ -10,11 +10,11 @@ using namespace std;
 Pilha::Pilha(){
 	// TODO Auto-generated constructor stub
 	//cria o No sentinela
-	Item sentinela("nulo");
-	fundo=new No(sentinela);
+	//Item sentinela("nulo");
+	fundo=new No();
 	fundo->prox=NULL;
 	topo=fundo;
-	estado="t";
+	//estado="t";
 }
 
 
@@ -71,8 +71,7 @@ Controle::Controle(int tam)
 	this->tam=tam;
 	temporario=new int[tam];
 	pilhas=new Pilha[tam];
-	primeiro=0;
-	ultimo=0;
+	numeroDeMovimentos=0;
 	ultimaPosicaoValida=0;
 
 }
@@ -84,15 +83,6 @@ void Controle::aloca(Pilha pilha)
 		ultimaPosicaoValida++;
 }
 
-void Controle::desenfileirar(){
-		if(ultimo==primeiro)
-		{
-
-			cout<<"Controle vazia\n";
-		}else{
-			primeiro=(primeiro+1)%tam;
-		}
-}
 
 
 void Controle::mostra(){
