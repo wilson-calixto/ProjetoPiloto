@@ -31,8 +31,10 @@ public:
 	Item item;
 	No *prox;
 	int indicePilha;
+	bool finalizado;
 	No(){};
 	No(Item item){
+		finalizado=false;
 		this->item=item;
 		prox=NULL;
 	};
@@ -41,6 +43,22 @@ public:
 	}
 	int getIndice() {
 			return indicePilha;
+	}
+
+	bool isFinalizado() const {
+		return finalizado;
+	}
+
+	void setFinalizado(bool finalizado) {
+		this->finalizado = finalizado;
+	}
+
+	const Item& getItem() const {
+		return item;
+	}
+
+	void setItem(const Item& item) {
+		this->item = item;
 	}
 };
 
@@ -92,12 +110,11 @@ public:
 class Controle {
 public:
 
-	int primeiro,origem,destino,*temporario;
-	int ultimo,tam,ultimaPosicaoValida;
+	int origem,destino,*temporario;
+	int tam,ultimaPosicaoValida,numeroDeMovimentos;
 	Pilha *pilhas;
 	Controle(int tam);
 	void aloca(Pilha pilha);
-	void desenfileirar();
 	void mostra();
 	int busca(Item item);
 
@@ -120,43 +137,35 @@ public:
 
 	void classifica(Item item,int destino){
 
-
+		this->destino=destino;
 		int indiceDaPilha;
 		bool achou;
 
-		for(indiceDaPilha=0;indiceDaPilha<=ultimaPosicaoValida;indiceDaPilha++){
+		for(indiceDaPilha=0;indiceDaPilha<=ultimaPosicaoValida;indiceDaPilha++)
+		{
 			achou=pilhas[indiceDaPilha].busca(item);
 			if(achou)//se achou
 			{
-
-				// classifica a origen e o destino
-				pilhas[destino].setEstado("d");
-				this->destino=destino;
-				if(destino==indiceDaPilha)
-				{
-					pilhas[indiceDaPilha].setEstado("od");
-					this->origem=destino;
-				}else{
-					pilhas[indiceDaPilha].setEstado("o");
 					this->origem=indiceDaPilha;
-				}
-
 			}
 		}
+
+		//delimitador fim do vetor temporario
+
+		for(int t=0;t<tam;t++)
+		{
+					this->temporario[t]=-1;
+		}
+
 		// classifica os temporarios
-		string aux="o";
 		int j=0;
 		for(int i=0;i<ultimaPosicaoValida;i++)
 		{
-
-			aux=pilhas[i].getEstado();
-			if(aux!="o" && aux!="d" && aux!="od")
-			{
-					cout<<aux<<endl;
-					cout<<i<<endl;
+				if(i!=this->origem && i!=this->destino)
+				{
 					this->temporario[j]=i;
 					j++;
-			}
+				}
 		}
 		//delimitador fim do vetor temporario
 		temporario[j]=-1;
@@ -169,11 +178,12 @@ public:
 	}
 
 	void TrocaDePilha(int origem,int destino,Item item){
-
 				pilhas[origem].desempilha(item);
 				cout<<"\nmovendo o item ";
 				item.mostra();
+				cout<<"da pilha "<<origem<<" para a pilha "<<destino<<endl;
 				pilhas[destino].empilha(item);
+				this->numeroDeMovimentos++;
 	}
 	void mostraT(){
 
@@ -184,58 +194,83 @@ public:
 				}
 	}
 
-	int melhorTemporario(){
-		int i=0,tamDaMenorPilha=1000,tamAtual=0,melhorIndice;//vou guardar o menor contador possivel
+	int piorTemporario(){
+		int i=0,tamDaMaiorPilha=0,tamAtual=0,piorIndice=this->temporario[0];
+				//vou guardar o maior contador possivel
 
-		while(temporario[i]!=-1){
-			tamAtual=pilhas[temporario[i]].getTam();
-				  if(tamDaMenorPilha>tamAtual){
+				while(this->temporario[i]!=-1){
+					tamAtual=pilhas[this->temporario[i]].getTam();
+					//cout<<pilhas[this->temporario[i]].getTam()<<endl;
+						if(tamDaMaiorPilha<tamAtual){
+							  tamDaMaiorPilha=tamAtual;
+							  piorIndice=this->temporario[i];
+						  }
+						i++;
+				}
+				return piorIndice;
+
+	}
+	int melhorTemporario(){
+		int i=0,tamDaMenorPilha=1000,tamAtual=0,melhorIndice=this->temporario[0];
+		//vou guardar o menor contador possivel
+//o temp estiva vazio ele retorna -1
+		while(this->temporario[i]!=-1){
+			tamAtual=pilhas[this->temporario[i]].getTam();
+			//cout<<pilhas[this->temporario[i]].getTam()<<endl;
+				if(tamDaMenorPilha>tamAtual){
 					  tamDaMenorPilha=tamAtual;
-					  melhorIndice=temporario[i];
+					  melhorIndice=this->temporario[i];
 				  }
 				i++;
 		}
 		return melhorIndice;
 	}
 
-	void move(Item item, int origem,int destino,int temp){
-		if(pilhas[this->destino].topo->item.codigo==item.codigo)
-		{//se topo do destino tiver o item
-			cout<<"fim da ordenacao"<<endl;//pilha de origem for == a item
-		}else{
-			//calcula o melhor temporario posivel
+	void move(Item item, int origem,int destino,int temp)
+	{
+		//calcula o melhor temporario posivel
+		temp=melhorTemporario();
+
+		if(this->origem==this->destino && pilhas[this->origem].topo->prox->item.codigo==item.codigo)
+		{
+			temp=piorTemporario();
+			TrocaDePilha(origem,temp,item);
+			this->origem=temp;
+			classifica(item,this->destino);
 			temp=melhorTemporario();
-
-			//limpa a pilha destino ele esta limpando tudo e isso nao e certo
-			if(pilhas[this->destino].topo->prox!=NULL ){
-
-				TrocaDePilha(destino,temp,item);
-				cout<<"da pilha "<<destino<<" para a pilha "<<temp<<endl;
+			move(item,this->origem,this->destino,temp);
+		}else{
+			//limpa a pilha origem
+			if(pilhas[this->origem].topo->prox->item.codigo!=item.codigo)
+			{
+				TrocaDePilha(origem,temp,item);
 				move(item,origem,destino,temp);
 
 			}else{
+				//TERMINA O PROCESSAMENTO caso que finalza a recursividade
+				if(pilhas[this->destino].topo->prox==NULL || pilhas[this->destino].topo->prox->isFinalizado())
+				{
 
-				if(pilhas[this->origem].topo->prox->item.codigo==item.codigo){
 					TrocaDePilha(origem,destino,item);
+					//marcando o no como finalizado
+					pilhas[this->destino].topo->prox->setFinalizado(true);
+					pilhas[this->destino].topo->prox->item.mostra();
 				}else{
+					//limpa o destino
 
-					TrocaDePilha(origem,temp,item);
-					cout<<"da pilha "<<origem<<" para a pilha "<<temp<<endl;
+					TrocaDePilha(destino,temp,item);
 					move(item,origem,destino,temp);
 				}
-
 			}
 		}
+
 	}
 
 
 
 
-
 	void organiza(Item &item){
-
 		move(item,this->origem,this->destino,this->temporario[0]);
-
 	}
 
 };
