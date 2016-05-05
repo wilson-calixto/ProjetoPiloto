@@ -294,3 +294,136 @@ public class Conta {
 	
 	
 }
+
+
+
+
+
+
+
+
+
+
+
+package eletrodomesticos;
+
+public abstract class Eletrodomesticos {
+	String voltagem;
+	float preco;
+	boolean on_off;
+	
+	protected  abstract void ligar();
+
+	protected abstract void desligar();
+	
+
+}
+
+
+
+
+
+
+
+package eletrodomesticos;
+
+public abstract class EletrodomesticosDaCozinha extends Eletrodomesticos {
+
+	public EletrodomesticosDaCozinha() {
+		// TODO Auto-generated constructor stub
+	}
+
+	@Override
+	protected void ligar() {
+		// TODO Auto-generated method stub
+		
+
+	}
+
+	@Override
+	protected void desligar() {
+		// TODO Auto-generated method stub
+
+	}
+	protected abstract void dataDeChegada();
+
+	
+	
+
+}
+
+
+
+
+package eletrodomesticos;
+
+import javax.swing.JOptionPane;
+
+public class Fogao extends Eletrodomesticos {
+
+	public Fogao() {
+		// TODO Auto-generated constructor stub
+	}
+
+	@Override
+	protected void ligar() {
+		// TODO Auto-generated method stub
+		on_off=true;
+		
+		
+	}
+
+	@Override
+	protected void desligar() {
+		// TODO Auto-generated method stub
+		on_off=false;
+		
+		
+	}
+
+	void mostra(){
+		String m="sou um fogao, bonito e bolado";
+		JOptionPane.showMessageDialog(null, m);
+		
+	}
+	
+}
+
+
+
+
+
+
+
+
+
+
+
+package eletrodomesticos;
+
+import java.util.ArrayList;
+import javax.swing.JOptionPane;
+public class Principal {
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+		 ArrayList <Eletrodomesticos> loja = new ArrayList<Eletrodomesticos>();
+		 loja.add(new Geladeira());
+		 loja.add(new Microondas());
+		 Fogao f =new Fogao();
+		 
+		 f.mostra();
+		 loja.add(f);
+	     if (loja.get(2) instanceof Fogao){
+	    	 Fogao f2=(Fogao)loja.get(2);
+	    	 f2.mostra();
+	     }
+	}
+
+}
+
+
+
+
+
+
