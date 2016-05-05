@@ -492,5 +492,13 @@ public class Principal {
 
 
 
+RADIO{
+	
+	
+	
+//constantes
 
 
+private static final FM =1
+private static final AM =2
+}
