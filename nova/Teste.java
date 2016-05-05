@@ -395,6 +395,73 @@ public class Fogao extends Eletrodomesticos {
 
 
 
+package eletrodomesticos;
+
+public class Microondas extends Eletrodomesticos {
+
+	public Microondas() {
+		// TODO Auto-generated constructor stub
+	}
+
+	@Override
+	protected void ligar() {
+		// TODO Auto-generated method stub
+		on_off=true;
+		
+	}
+
+	@Override
+	protected void desligar() {
+		// TODO Auto-generated method stub
+		on_off=false;
+	}
+
+
+}
+
+
+
+
+
+
+package eletrodomesticos;
+
+public class Geladeira extends EletrodomesticosDaCozinha {
+
+	public Geladeira() {
+		// TODO Auto-generated constructor stub
+	}
+
+	@Override
+	protected void ligar() {
+		// TODO Auto-generated method stub
+		on_off=true;
+		
+	}
+
+	@Override
+	protected void desligar() {
+		// TODO Auto-generated method stub
+		on_off=false;
+	}
+	
+	
+	@Override
+	protected void dataDeChegada() {
+		// TODO Auto-generated method stub
+		
+	}
+
+}
+
+
+
+
+
+
+
+
+
 
 
 
