@@ -499,6 +499,6 @@ RADIO{
 //constantes
 
 
-private static final FM =1
-private static final AM =2
+private static short final FM =1
+private static short final AM =2
 }
