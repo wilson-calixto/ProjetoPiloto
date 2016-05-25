@@ -68,20 +68,25 @@ bool Pilha::busca(Item item){
 Controle::Controle(int tam)
 {
 	// TODO Auto-generated constructor stub
-	this->tam=tam;
-	temporario=new int[tam];
+	temporario=new int[tam-2];
+
 	pilhas=new Pilha[tam];
 	primeiro=0;
 	ultimo=0;
-	ultimaPosicaoValida=0;
-
+	this->tam=tam;
 }
 
 void Controle::aloca(Pilha pilha)
 {
-		pilha.setIndice(ultimaPosicaoValida);//coloca o indice na pilha
-		pilhas[ultimaPosicaoValida]=pilha;
-		ultimaPosicaoValida++;
+	if((ultimo+1)%tam!=primeiro)
+	{
+		pilha.setIndice(ultimo);//coloca o indice na pilha
+		pilhas[ultimo]=pilha;
+		ultimo=ultimo+1%tam;
+	}else{
+		cout<<"Controle cheia";
+
+	}
 }
 
 void Controle::desenfileirar(){
@@ -96,25 +101,26 @@ void Controle::desenfileirar(){
 
 
 void Controle::mostra(){
-		int i;
-		for(i=0;i<=ultimaPosicaoValida;i++)
+		int primeiroLocal=primeiro;
+		while(ultimo!=primeiroLocal)
 		{
-				pilhas[i].mostra();
+				pilhas[primeiroLocal].mostra();
 				cout<<"\n";
-
+				primeiroLocal=(primeiroLocal+1)%tam;
 		}
 
 }
 int Controle::busca(Item item){
-
+		int primeiroLocal=primeiro;
 		bool achou=false;
-		for(int i=0;i<=ultimaPosicaoValida;i++)
+		while(ultimo!=primeiroLocal)
 		{
-				achou=pilhas[i].busca(item);
+				achou=pilhas[primeiroLocal].busca(item);
 				if(achou)
 				{
-						return i;
+						return primeiroLocal;
 				}
+				primeiroLocal=(primeiroLocal+1)%tam;
 		}
 		return -1;
 }
