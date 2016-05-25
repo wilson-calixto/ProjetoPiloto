@@ -27,7 +27,6 @@ public class Presunto extends Genero {
      */
     public void setNome() {
         // TODO implement here
-        return null;
     }
 
 }

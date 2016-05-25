@@ -1,6 +1,6 @@
 package supermercado;
 
-
+import estoque.*;
 import java.util.*;
 
 /**
@@ -24,7 +24,7 @@ public class SupermercadoWeb {
      */
     private void iniciaSupermercado() {
         // TODO implement here
-        return null;
+        
     }
 
     /**

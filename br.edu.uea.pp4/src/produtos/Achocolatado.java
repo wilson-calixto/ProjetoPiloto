@@ -27,7 +27,7 @@ public class Achocolatado extends Genero {
      */
     public void setNome() {
         // TODO implement here
-        return null;
+        
     }
 
 }

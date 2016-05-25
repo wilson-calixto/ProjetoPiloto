@@ -32,9 +32,9 @@ public class Data {
     /**
      * @return
      */
-    public void toString() {
+    public void toStrings() {
         // TODO implement here
-        return null;
+    
     }
 
     /**
@@ -42,7 +42,7 @@ public class Data {
      */
     public void setData() {
         // TODO implement here
-        return null;
+    
     }
 
     /**
@@ -77,28 +77,19 @@ public class Data {
         return null;
     }
 
-    /**
-     * @return
-     */
+    /*
     public int «property get» getDia() {
         // TODO implement here
         return 0;
     }
 
-    /**
-     * @return
-     */
     public int «property get» getMes() {
         // TODO implement here
         return 0;
     }
-
-    /**
-     * @return
-     */
-    public int «property get» getAno() {
+  	public int «property get» getAno() {
         // TODO implement here
         return 0;
     }
-
+*/
 }

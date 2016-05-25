@@ -1,5 +1,5 @@
 package estoque;
-
+import produtos.*;
 import java.util.*;
 
 /**
@@ -20,7 +20,7 @@ public class Estoque {
      */
     public void entraItem() {
         // TODO implement here
-        return null;
+        
     }
 
     /**
@@ -35,7 +35,7 @@ public class Estoque {
      * @param Marca 
      * @return
      */
-    public List getItens(void Marca) {
+    public List getItens(Marca marca) {
         // TODO implement here
         return null;
     }
@@ -44,7 +44,7 @@ public class Estoque {
      * @param Produto 
      * @return
      */
-    public List getItens(void Produto) {
+    public List getItens(Produto produto) {
         // TODO implement here
         return null;
     }
@@ -69,7 +69,7 @@ public class Estoque {
      * @param Genero 
      * @return
      */
-    public List getItens(void Genero) {
+    public List getItens(Genero genero) {
         // TODO implement here
         return null;
     }

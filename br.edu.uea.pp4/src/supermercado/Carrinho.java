@@ -29,7 +29,7 @@ public class Carrinho {
      */
     public void removeItem() {
         // TODO implement here
-        return null;
+        
     }
 
     /**
