@@ -294,3 +294,211 @@ public class Conta {
 	
 	
 }
+
+
+
+
+
+
+
+
+
+
+
+package eletrodomesticos;
+
+public abstract class Eletrodomesticos {
+	String voltagem;
+	float preco;
+	boolean on_off;
+	
+	protected  abstract void ligar();
+
+	protected abstract void desligar();
+	
+
+}
+
+
+
+
+
+
+
+package eletrodomesticos;
+
+public abstract class EletrodomesticosDaCozinha extends Eletrodomesticos {
+
+	public EletrodomesticosDaCozinha() {
+		// TODO Auto-generated constructor stub
+	}
+
+	@Override
+	protected void ligar() {
+		// TODO Auto-generated method stub
+		
+
+	}
+
+	@Override
+	protected void desligar() {
+		// TODO Auto-generated method stub
+
+	}
+	protected abstract void dataDeChegada();
+
+	
+	
+
+}
+
+
+
+
+package eletrodomesticos;
+
+import javax.swing.JOptionPane;
+
+public class Fogao extends Eletrodomesticos {
+
+	public Fogao() {
+		// TODO Auto-generated constructor stub
+	}
+
+	@Override
+	protected void ligar() {
+		// TODO Auto-generated method stub
+		on_off=true;
+		
+		
+	}
+
+	@Override
+	protected void desligar() {
+		// TODO Auto-generated method stub
+		on_off=false;
+		
+		
+	}
+
+	void mostra(){
+		String m="sou um fogao, bonito e bolado";
+		JOptionPane.showMessageDialog(null, m);
+		
+	}
+	
+}
+
+
+
+
+
+
+
+package eletrodomesticos;
+
+public class Microondas extends Eletrodomesticos {
+
+	public Microondas() {
+		// TODO Auto-generated constructor stub
+	}
+
+	@Override
+	protected void ligar() {
+		// TODO Auto-generated method stub
+		on_off=true;
+		
+	}
+
+	@Override
+	protected void desligar() {
+		// TODO Auto-generated method stub
+		on_off=false;
+	}
+
+
+}
+
+
+
+
+
+
+package eletrodomesticos;
+
+public class Geladeira extends EletrodomesticosDaCozinha {
+
+	public Geladeira() {
+		// TODO Auto-generated constructor stub
+	}
+
+	@Override
+	protected void ligar() {
+		// TODO Auto-generated method stub
+		on_off=true;
+		
+	}
+
+	@Override
+	protected void desligar() {
+		// TODO Auto-generated method stub
+		on_off=false;
+	}
+	
+	
+	@Override
+	protected void dataDeChegada() {
+		// TODO Auto-generated method stub
+		
+	}
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+package eletrodomesticos;
+
+import java.util.ArrayList;
+import javax.swing.JOptionPane;
+public class Principal {
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+		 ArrayList <Eletrodomesticos> loja = new ArrayList<Eletrodomesticos>();
+		 loja.add(new Geladeira());
+		 loja.add(new Microondas());
+		 Fogao f =new Fogao();
+		 
+		 f.mostra();
+		 loja.add(f);
+	     if (loja.get(2) instanceof Fogao){
+	    	 Fogao f2=(Fogao)loja.get(2);
+	    	 f2.mostra();
+	     }
+	}
+
+}
+
+
+
+
+RADIO{
+	
+	
+	
+//constantes
+
+
+private static short final FM =1
+private static short final AM =2
+}
