@@ -1,95 +1,67 @@
 package produtos;
 
 
+import java.text.SimpleDateFormat;
 import java.util.*;
 
 /**
  * 
  */
 public class Data {
-
-    /**
-     * Default constructor
-     */
+    private int dia;
+    private int mes;
+    private int ano;
+    private String data;
+    private Calendar c;
     public Data() {
     }
 
-    /**
-     * 
-     */
-    private int dia;
-
-    /**
-     * 
-     */
-    private int mes;
-
-    /**
-     * 
-     */
-    private int ano;
-
-    /**
-     * @return
-     */
+    public Data(int dia,int mes,int ano) {
+    	this.dia=dia;
+    	this.mes=mes;
+    	this.ano=ano;
+    }
     public void toStrings() {
-        // TODO implement here
-    
+    	data=dia+"/"+mes+"/"+ano;
     }
 
-    /**
-     * @return
-     */
-    public void setData() {
-        // TODO implement here
-    
+    public void setData(int dia,int mes,int ano) {
+    	this.dia=dia;
+    	this.mes=mes;
+    	this.ano=ano;
     }
 
-    /**
-     * @return
-     */
-    public boolean antres() {
+    public boolean antes() {
         // TODO implement here
         return false;
     }
-
-    /**
-     * @return
-     */
     public boolean depois() {
         // TODO implement here
         return false;
     }
-
-    /**
-     * @return
-     */
     public boolean igual() {
         // TODO implement here
         return false;
     }
 
-    /**
-     * @return
-     */
-    public Data dataHoje() {
-        // TODO implement here
-        return null;
+    public String dataHoje() {
+    	c = Calendar.getInstance();
+		data=c.getTime()+"/"+c.get(Calendar.YEAR)+"/"+c.get(Calendar.DAY_OF_MONTH);
+        return data;
     }
 
-    /*
-    public int «property get» getDia() {
+    public int  getDia() {
         // TODO implement here
-        return 0;
+        return dia;
     }
 
-    public int «property get» getMes() {
+    public int getMes() {
         // TODO implement here
-        return 0;
+        return mes;
     }
-  	public int «property get» getAno() {
+  	public int getAno() {
         // TODO implement here
-        return 0;
+        return ano;
     }
-*/
+
 }

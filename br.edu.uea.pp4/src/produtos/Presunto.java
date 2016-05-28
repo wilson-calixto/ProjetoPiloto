@@ -3,30 +3,16 @@ package produtos;
 
 import java.util.*;
 
-/**
- * 
- */
 public class Presunto extends Genero {
-
-    /**
-     * Default constructor
-     */
     public Presunto() {
     }
-
-    /**
-     * @return
-     */
+    @Override
     public String getNome() {
         // TODO implement here
-        return "";
+        return nome;
     }
-
-    /**
-     * @return
-     */
-    public void setNome() {
-        // TODO implement here
+    @Override
+    public void setNome(String nome) {
+    		this.nome=nome;
     }
-
 }

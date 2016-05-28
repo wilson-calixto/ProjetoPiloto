@@ -3,15 +3,11 @@ package produtos;
 
 import java.util.*;
 
-/**
- * 
- */
-public class Genero {
-
-    /**
-     * Default constructor
-     */
-    public Genero() {
+public abstract class Genero {
+	String nome;
+	
+	public Genero() {
     }
-
+    public abstract String getNome();
+    public abstract void setNome(String nome);
 }
