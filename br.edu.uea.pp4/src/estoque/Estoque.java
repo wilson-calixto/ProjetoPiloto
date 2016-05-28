@@ -2,76 +2,57 @@ package estoque;
 import produtos.*;
 import java.util.*;
 
-/**
- * 
- */
 public class Estoque {
 
-    /**
-     * Default constructor
-     */
+    private ArrayList<ItemProduto> itemsProdutos;
+    
     public Estoque() {
     }
 
-
-
-    /**
-     * @return
-     */
-    public void entraItem() {
-        // TODO implement here
-        
+    public void entraItem(ItemProduto item) {
+        itemsProdutos.add(item);
     }
 
-    /**
-     * @return
-     */
-    public ItemProduto saiItem() {
-        // TODO implement here
-        return null;
+    public ItemProduto saiItem(ItemProduto item) {
+        itemsProdutos.remove(item);
+        return item;
     }
 
-    /**
-     * @param Marca 
-     * @return
-     */
-    public List getItens(Marca marca) {
-        // TODO implement here
-        return null;
+    public ArrayList<ItemProduto> getItens() {
+        return itemsProdutos;
     }
 
-    /**
-     * @param Produto 
-     * @return
-     */
-    public List getItens(Produto produto) {
-        // TODO implement here
-        return null;
+    public ArrayList<ItemProduto> getItens(Marca marca) {
+        ArrayList<ItemProduto> itemsMarca;
+        for(ItemProduto p : itemsProdutos) {
+            if(p.getProduto().getMarca().getNome().equals(marca.getNome())) {
+                itemsMarca.add(p);
+            }
+        }
+        return itemsMarca;
     }
 
-    /**
-     * @return
-     */
-    public List getItens() {
-        // TODO implement here
-        return null;
+    public ArrayList<ItemProduto> getItens(Produto produto) {
+       ArrayList<ItemProduto> itemsProduto;
+        for(ItemProduto p : itemsProdutos) {
+            if(p.getProduto().getCodigo().equals(produto.getCodigo())) {
+                itemsProduto.add(p);
+            }
+        }
+        return itemsProduto;
     }
 
-    /**
-     * @return
-     */
     public int qtdItens() {
-        // TODO implement here
-        return 0;
+        return itemsProdutos.size();
     }
-
-    /**
-     * @param Genero 
-     * @return
-     */
-    public List getItens(Genero genero) {
-        // TODO implement here
-        return null;
+    
+    public ArrayList<ItemProduto> getItens(Genero genero) {
+        ArrayList<ItemProduto> itemsGenero;
+        for(ItemProduto p : itemsProdutos) {
+            if(p instanceof genero) {
+                itemsGenero.add(p);
+            }
+        }
+        return itemsGenero;
     }
-
 }
