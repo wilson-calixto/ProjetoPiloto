@@ -8,13 +8,19 @@ import java.util.*;
  */
 public class SupermercadoWeb {
 
-    /**
-     * Default constructor
-     */
+    private Estoque estoque;
+    private Carrinho carrinho;
+    private ArrayList<Genero> generos;
+    private ArrayList<Produto> produtos;
+    private ArrayList<Marca> marcas;
+    
     public SupermercadoWeb() {
+        iniciaSupermercado();
     }
 
-
+    private void iniciaSupermercado() {
+        estoque = new Estoque();
+    }
 
 
 
