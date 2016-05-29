@@ -2,53 +2,32 @@ package produtos;
 
 import java.util.*;
 
-/**
- * 
- */
 public class ItemProduto {
 
-    /**
-     * Default constructor
-     */
+    private int codigo;
+    private Data validade;
+    private Produto produto;
+    
     public ItemProduto() {
     }
 
-    /**
-     * 
-     */
-    private int codigo;
-
-    /**
-     * 
-     */
-    private Data validade;
-
-
-
-
-
-    /**
-     * @return
-     */
     public Produto getProduto() {
-        // TODO implement here
         return null;
     }
+    
+    public void setProduto(Produto produto) {
+        this.produto = produto;
+    }
 
-    /**
-     * @return
-     */
     public boolean valido() {
-        // TODO implement here
         return false;
     }
 
-    /**
-     * @return
-     */
-    public Long getCodigo() {
-        // TODO implement here
-        return null;
+    public int getCodigo() {
+        return codigo;
     }
-
+    
+    public void setCodigo(int codigo) {
+        this.codigo = codigo;
+    }
 }
