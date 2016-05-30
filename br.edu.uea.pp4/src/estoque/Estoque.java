@@ -23,19 +23,21 @@ public class Estoque {
     }
 
     public ArrayList<ItemProduto> getItens(Marca marca) {
-        ArrayList<ItemProduto> itemsMarca;
+        ArrayList<ItemProduto> itemsMarca = null;
+        
         for(ItemProduto p : itemsProdutos) {
             if(p.getProduto().getMarca().getNome().equals(marca.getNome())) {
                 itemsMarca.add(p);
             }
         }
+        
         return itemsMarca;
     }
 
     public ArrayList<ItemProduto> getItens(Produto produto) {
-       ArrayList<ItemProduto> itemsProduto;
+       ArrayList<ItemProduto> itemsProduto = null;
         for(ItemProduto p : itemsProdutos) {
-            if(p.getProduto().getCodigo().equals(produto.getCodigo())) {
+            if(p.getProduto().getCodigo()==produto.getCodigo()) {
                 itemsProduto.add(p);
             }
         }
@@ -47,12 +49,13 @@ public class Estoque {
     }
     
     public ArrayList<ItemProduto> getItens(Genero genero) {
-        ArrayList<ItemProduto> itemsGenero;
+        ArrayList<ItemProduto> itemsGenero=null;
         for(ItemProduto p : itemsProdutos) {
-            if(p instanceof genero) {
+            if(p.getProduto().getGenero().equals(genero)) {
                 itemsGenero.add(p);
             }
         }
         return itemsGenero;
     }
+
 }
