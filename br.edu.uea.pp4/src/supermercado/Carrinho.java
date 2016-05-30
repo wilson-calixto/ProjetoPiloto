@@ -1,30 +1,32 @@
 package supermercado;
-
-
 import java.util.*;
 
-/**
- * 
- */
 public class Carrinho {
-
+	private ArrayList<ItemProduto> itemsProdutos;
+	
     public Carrinho() {
     }
-    public void adicionaItem() {
-        // TODO implement here
-        
+    
+    public void adicionaItem(ItemProduto item, Estoque estoque) {
+        estoque.saiItem(item);
+        itemsProdutos.add(item);
     }
+    
     public void removeItem() {
-        // TODO implement here
-        
+        estoque.entraItem(item);
+        itemsProdutos.remove(item);
     }
-    public List getItens() {
-        // TODO implement here
-        return null;
+    
+    public ArrayList<ItemProduto> getItens() {
+        return itemsProdutos;
     }
+    
     public double totalAPagar() {
-        // TODO implement here
-        return 0.0d;
+    	double total = 0.0f;
+    	
+    	for(ItemProduto p : itemsProdutos) {
+        	total += itemsProdutos.getProduto().getPreco();
+        }
+        return total;
     }
-
 }
